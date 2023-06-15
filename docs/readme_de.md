@@ -60,15 +60,27 @@
 </p>
 <p align="center">Du magst das Projekt? Wie wäre es mit einer kleinen <a href="https://www.paypal.me/anuraghazra">Spende</a> um es weiterhin am Leben zu erhalten?
 
-# Funktionen
+# Funktionen <!-- omit in toc -->
 
 - [GitHub Statistiken-Karte](#github-statistiken-karte)
-- [GitHub Extra Pins](#github-extra-pins)
+    - [Verbergen individueller Statistiken](#verbergen-individueller-statistiken)
+    - [Symbole anzeigen](#symbole-anzeigen)
+    - [Erscheinungsbild/Themes](#erscheinungsbildthemes)
+    - [Anpassungen/Personalisierung](#anpassungenpersonalisierung)
+- [GitHub Extra-Pins](#github-extra-pins)
+    - [Benutzung](#benutzung)
+    - [Beispiele](#beispiele)
 - [Top Programmiersprachen-Karte](#top-programmiersprachen-karte)
+    - [Benutzung](#benutzung-1)
+    - [Verbirg einzelne Sprachen](#verbirg-einzelne-sprachen)
+    - [Kompaktes Sprachen-Karte Layout](#kompaktes-sprachen-karte-layout)
+    - [Beispiel](#beispiel)
 - [Wakatime Wochen-Statistik](#wakatime-wochen-statistik)
-- [Erscheinungsbild/Themes](#erscheinungsbildthemes)
-- [Anpassungen/Personalisierung](#anpassungenpersonalisierung)
-- [Selber betreiben](#betreibe-es-auf-deiner-eigenen-vercel-instanz)
+    - [Beispiel](#beispiel-1)
+    - [Alle Beispiele](#alle-beispiele)
+    - [Kleiner Tipp (Ausrichten der Repo-Karte)](#kleiner-tipp-ausrichten-der-repo-karte)
+  - [Betreibe es auf deiner eigenen Vercel-Instanz](#betreibe-es-auf-deiner-eigenen-vercel-instanz)
+  - [:sparkling\_heart: Unterstütze das Projekt](#sparkling_heart-unterstütze-das-projekt)
 
 # GitHub Statistiken-Karte
 
@@ -161,7 +173,7 @@ Du kannst mehrere, mit Kommas separierte, Werte in der bg_color Option angeben, 
 
 - `hide` - Verbirgt die angegebenen Sprachen von der Karte _(Komma separierte Werte)_
 - `hide_title` - _(Boolean)_
-- `layout` - Wechsel zwischen den zwei verfügbaren Layouts `default` & `compact`
+- `layout` - Wechseln Sie zwischen den fünf verfügbaren Layouts `normal` & `compact` & `donut` & `donut-vertical` & `pie`
 - `card_width` - Lege die Breite der Karte manuell fest _(Zahl)_
 
 > :warning: **Wichtig:**
@@ -253,18 +265,18 @@ Du kannst die `&layout=compact` Option nutzen, um das Kartendesign zu ändern.
 Ändere `?username=` in den eigenen [Wakatime](https://wakatime.com)-Benutzernamen.
 
 ```md
-[![willianrod's wakatime stats](https://github-readme-stats.vercel.app/api/wakatime?username=willianrod)](https://github.com/anuraghazra/github-readme-stats)
+[![Harlok's wakatime stats](https://github-readme-stats.vercel.app/api/wakatime?username=Harlok)](https://github.com/anuraghazra/github-readme-stats)
 ```
 
 ### Beispiel
 
-[![willianrod's wakatime stats](https://github-readme-stats.vercel.app/api/wakatime?username=willianrod)](https://github.com/anuraghazra/github-readme-stats)
+[![Harlok's wakatime stats](https://github-readme-stats.vercel.app/api/wakatime?username=Harlok)](https://github.com/anuraghazra/github-readme-stats)
 
-[![willianrod's wakatime stats](https://github-readme-stats.vercel.app/api/wakatime?username=willianrod&hide_progress=true)](https://github.com/anuraghazra/github-readme-stats)
+[![Harlok's wakatime stats](https://github-readme-stats.vercel.app/api/wakatime?username=Harlok&hide_progress=true)](https://github.com/anuraghazra/github-readme-stats)
 
 - Kompaktes Layout
 
-[![willianrod's wakatime stats](https://github-readme-stats.vercel.app/api/wakatime?username=willianrod&layout=compact)](https://github.com/anuraghazra/github-readme-stats)
+[![Harlok's wakatime stats](https://github-readme-stats.vercel.app/api/wakatime?username=Harlok&layout=compact)](https://github.com/anuraghazra/github-readme-stats)
 
 ---
 

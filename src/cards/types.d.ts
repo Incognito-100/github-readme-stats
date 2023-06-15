@@ -27,6 +27,7 @@ export type StatCardOptions = CommonOptions & {
   ring_color: string;
   text_bold: boolean;
   rank_icon: RankIcon;
+  show_total_reviews: boolean;
 };
 
 export type RepoCardOptions = CommonOptions & {
@@ -39,7 +40,7 @@ export type TopLangOptions = CommonOptions & {
   hide_border: boolean;
   card_width: number;
   hide: string[];
-  layout: "compact" | "normal";
+  layout: "compact" | "normal" | "donut" | "donut-vertical" | "pie";
   custom_title: string;
   langs_count: number;
   disable_animations: boolean;
