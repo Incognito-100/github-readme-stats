@@ -10,7 +10,17 @@ import {
 } from "../common/utils.js";
 import { getStyles } from "../getStyles.js";
 import { wakatimeCardLocales } from "../translations.js";
-import languageColors from "../common/languageColors.json";
+
+/** Import language colors.
+ *
+ * @description Here we use the workaround found in
+ * https://stackoverflow.com/questions/66726365/how-should-i-import-json-in-node
+ * since vercel is using v16.14.0 which does not yet support json imports without the
+ * --experimental-json-modules flag.
+ */
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
+const languageColors = require("../common/languageColors.json"); // now works
 
 /**
  * Creates the no coding activity SVG node.
@@ -18,7 +28,7 @@ import languageColors from "../common/languageColors.json";
  * @param {object} props The function properties.
  * @param {string} props.color No coding activity text color.
  * @param {string} props.text No coding activity translated text.
- * @return {string} No coding activity SVG node string.
+ * @returns {string} No coding activity SVG node string.
  */
 const noCodingActivityNode = ({ color, text }) => {
   return `
@@ -31,11 +41,10 @@ const noCodingActivityNode = ({ color, text }) => {
  *
  * @param {Object} args The function arguments.
  * @param {import("../fetchers/types").WakaTimeLang} args.lang The languages array.
- * @param {number} args.totalSize The total size of the languages.
  * @param {number} args.x The x position of the language node.
  * @param {number} args.y The y position of the language node.
  */
-const createCompactLangNode = ({ lang, totalSize, x, y }) => {
+const createCompactLangNode = ({ lang, x, y }) => {
   const color = languageColors[lang.name] || "#858585";
 
   return `
@@ -53,25 +62,21 @@ const createCompactLangNode = ({ lang, totalSize, x, y }) => {
  *
  * @param {Object} args The function arguments.
  * @param {import("../fetchers/types").WakaTimeLang[]} args.langs The language objects.
- * @param {number} args.totalSize The total size of the languages.
- * @param {number} args.x The x position of the language node.
  * @param {number} args.y The y position of the language node.
  */
-const createLanguageTextNode = ({ langs, totalSize, x, y }) => {
+const createLanguageTextNode = ({ langs, y }) => {
   return langs.map((lang, index) => {
     if (index % 2 === 0) {
       return createCompactLangNode({
         lang,
         x: 25,
         y: 12.5 * index + y,
-        totalSize,
       });
     }
     return createCompactLangNode({
       lang,
       x: 230,
       y: 12.5 + 12.5 * index,
-      totalSize,
     });
   });
 };
@@ -133,7 +138,7 @@ const createTextNode = ({
  * hiding languages.
  *
  * @param {import("../fetchers/types").WakaTimeLang[]} languages The languages array.
- * @return {void} The recalculated languages array.
+ * @returns {void} The recalculated languages array.
  */
 const recalculatePercentages = (languages) => {
   const totalSum = languages.reduce(
@@ -194,7 +199,7 @@ const renderWakatimeCard = (stats = {}, options = { hide: [] }) => {
 
   const lheight = parseInt(String(line_height), 10);
 
-  const langsCount = clampValue(parseInt(String(langs_count)), 1, langs_count);
+  const langsCount = clampValue(langs_count, 1, langs_count);
 
   // returns theme based colors with proper overrides and defaults
   const { titleColor, textColor, iconColor, bgColor, borderColor } =
@@ -264,10 +269,8 @@ const renderWakatimeCard = (stats = {}, options = { hide: [] }) => {
       ${
         filteredLanguages.length
           ? createLanguageTextNode({
-              x: 0,
               y: 25,
               langs: filteredLanguages,
-              totalSize: 100,
             }).join("")
           : noCodingActivityNode({
               // @ts-ignore
@@ -288,7 +291,7 @@ const renderWakatimeCard = (stats = {}, options = { hide: [] }) => {
               id: language.name,
               label: language.name,
               value: language.text,
-              index: index,
+              index,
               percent: language.percent,
               // @ts-ignore
               progressBarColor: titleColor,
