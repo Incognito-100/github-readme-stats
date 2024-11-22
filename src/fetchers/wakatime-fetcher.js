@@ -1,12 +1,13 @@
 import axios from "axios";
 import { CustomError, MissingParamError } from "../common/utils.js";
+import { URL } from "url";
 
 /**
  * WakaTime data fetcher.
  *
  * @param {{username: string, api_domain: string }} props Fetcher props.
  * @returns {Promise<WakaTimeData>} WakaTime data response.
- */
+*/
 const fetchWakatimeStats = async ({ username, api_domain }) => {
   if (!username) {
     throw new MissingParamError(["username"]);
@@ -14,13 +15,14 @@ const fetchWakatimeStats = async ({ username, api_domain }) => {
 
   const allowedDomains = ["wakatime.com", "another-trusted-domain.com"];
   const sanitizedDomain = api_domain ? api_domain.replace(/\/$/gi, "") : "wakatime.com";
-  if (!allowedDomains.includes(sanitizedDomain)) {
-    throw new CustomError(`Invalid API domain: '${sanitizedDomain}'`, "INVALID_API_DOMAIN");
+  const urlHost = new URL(`https://${sanitizedDomain}`).host;
+  if (!allowedDomains.includes(urlHost)) {
+    throw new CustomError(`Invalid API domain: '${urlHost}'`, "INVALID_API_DOMAIN");
   }
 
   try {
     const { data } = await axios.get(
-      `https://${sanitizedDomain}/api/v1/users/${encodeURIComponent(username)}/stats?is_including_today=true`,
+      `https://${urlHost}/api/v1/users/${encodeURIComponent(username)}/stats?is_including_today=true`,
     );
 
     return data.data;
